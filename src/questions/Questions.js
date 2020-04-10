@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import { View, ScrollView, ActivityIndicator } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { View, ScrollView, ActivityIndicator, Text } from 'react-native'
+import { useSafeArea } from 'react-native-safe-area-context'
 
 import { useGetQuestionsData } from "../utils/data"
 import QueSingleSelect from './components/QueSingleSelect'
@@ -35,6 +35,7 @@ const FIRST_QUE = {
  */
 export default () => {
 
+    const safeArea = useSafeArea()
     const [api_state, data, getApiData] = useGetQuestionsData()
 
     const [language, setLanguage] = useState('engish')
@@ -47,8 +48,9 @@ export default () => {
     }
 
     return (
-        <SafeAreaView style={styles.queContainer}>
+        <View style={{ paddingTop: safeArea.top }}>
             <ScrollView>
+                <Text style={styles.heading}>Q & A</Text>
                 <QueSingleSelect
                     question={FIRST_QUE.question} options={FIRST_QUE.options}
                     ans={language} ans_selected={ans_selected}
@@ -59,6 +61,6 @@ export default () => {
                     <QueList data={data} />
                 }
             </ScrollView>
-        </SafeAreaView>
+        </View>
     )
 }
