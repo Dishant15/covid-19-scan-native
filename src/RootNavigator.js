@@ -3,8 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-elements'
 
 import Questions from './questions/Questions';
-import UploadScan from './upload/screens/UploadScan';
-import Analytics from './analytics/screens/Analytics';
+import UploadScan from './upload/UploadScan';
+import Analytics from './analytics/Analytics';
 
 
 const Tab = createBottomTabNavigator();
