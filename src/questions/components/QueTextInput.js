@@ -60,6 +60,8 @@ export default ({ index, question, ans, ans_selected, placeholder, buttonText, i
                             value={text}
                             maxFontSizeMultiplier={1}
                             keyboardType='decimal-pad'
+                            returnKeyType="done"
+                            onSubmitEditing={() => setAns(index, text)}
                             onChangeText={(value) => setText(value)}
                             inputStyle={{
                                 fontSize: 14
