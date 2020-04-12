@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { View, ScrollView, ActivityIndicator, Text } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
@@ -35,6 +35,7 @@ const FIRST_QUE = {
  */
 export default () => {
 
+    const scrollViewRef = useRef(null)
     const safeArea = useSafeArea()
     const [api_state, data, getApiData] = useGetQuestionsData()
 
@@ -49,7 +50,10 @@ export default () => {
 
     return (
         <View style={{ paddingTop: safeArea.top }}>
-            <ScrollView>
+            <ScrollView
+                ref={scrollViewRef}
+                onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: false })}
+                contentContainerStyle={{ paddingBottom: 100 }}>
                 <Text style={styles.heading}>Q & A</Text>
                 <QueSingleSelect
                     question={FIRST_QUE.question} options={FIRST_QUE.options}
