@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform, Dimensions } from 'react-native'
 import { colors } from '../utils/constants'
 
 
@@ -8,7 +8,7 @@ export const listStyles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: 'white',
         marginHorizontal: 16,
-        marginVertical: 8
+        marginVertical: 8,
     },
     cancelBtnWrapper: {
         position: 'absolute',
@@ -23,7 +23,6 @@ export const listStyles = StyleSheet.create({
         height: 16
     },
     imgWrapper: {
-        flex: 1,
         borderRadius: 10,
         overflow: 'hidden',
         height: 156
@@ -48,7 +47,6 @@ export const listStyles = StyleSheet.create({
     },
     outlined: {
         padding: 10,
-        marginVertical: 24,
         borderColor: '#9e9e9e'
     },
     outlinedText: {
@@ -57,7 +55,6 @@ export const listStyles = StyleSheet.create({
         color: '#9e9e9e'
     }
 })
-
 
 export default StyleSheet.create({
     block: {
@@ -68,9 +65,13 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         margin: 16
     },
+
+
     //==================================================================
     // EMPTY BLOCK
     //==================================================================
+
+
     emptyContainer: {
         flex: 1,
         alignItems: 'center',
@@ -92,5 +93,42 @@ export default StyleSheet.create({
         fontSize: 14,
         fontWeight: "bold",
         color: 'white'
+    },
+
+
+    //==================================================================
+    // FORM BLOCK
+    //==================================================================
+
+
+    inputBlock: {
+        borderRadius: 10,
+        marginHorizontal: 16,
+        marginVertical: 8,
+        backgroundColor: 'white',
+        ...Platform.select({
+            android: {
+                elevation: 3
+            },
+            ios: {
+                shadowColor: "#000",
+                shadowOffset: {
+                    width: 0,
+                    height: 1,
+                },
+                shadowOpacity: 0.22,
+                shadowRadius: 2.22
+            }
+        })
+    },
+    containerStyle: {
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        borderBottomWidth: 0
+    },
+    smallSeperator: {
+        height: 2,
+        backgroundColor: '#bdbdbd',
+        opacity: 0.5
     }
 })

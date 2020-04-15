@@ -13,17 +13,16 @@ import size from 'lodash/size'
  */
 export default () => {
 
-    const [pickedImages, setPickedImages] = useState([])
+    const [pickedImage, setPickedImage] = useState({})
 
-    let hasPickedImages = size(pickedImages) > 0
+    let hasPickedImage = size(pickedImage) > 0
 
-    const cleanTempImages = () => {
+    const cleanTempImage = () => {
         ImagePicker.clean()
     }
 
-    const removeImage = (removedIndex) => {
-        let filteredImages = pickedImages.filter((_, index) => index !== removedIndex)
-        setPickedImages(filteredImages)
+    const removeImage = () => {
+        setPickedImage({})
     }
 
     const pickImageFromGallary = () => {
@@ -35,10 +34,10 @@ export default () => {
             freeStyleCropEnabled: true,
             avoidEmptySpaceAroundImage: true
         }).then((image) => {
-            setPickedImages([...pickedImages, image])
+            setPickedImage(image)
         }).catch(_ => { })
     }
 
 
-    return { hasPickedImages, pickedImages, pickImageFromGallary, removeImage, cleanTempImages }
+    return { hasPickedImage, pickedImage, pickImageFromGallary, removeImage, cleanTempImage }
 }
