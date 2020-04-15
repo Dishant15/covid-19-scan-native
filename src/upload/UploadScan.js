@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, Platform } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
 import { Icon, Button, Input } from 'react-native-elements'
 
@@ -25,16 +25,18 @@ export default () => {
 
     const { hasPickedImage, pickImageFromGallary, pickedImage, removeImage } = useGallaryPicker()
 
-    console.log(data, pickedImage)
+    console.log("response", data)
 
     const uploadImage = () => {
         if (!hasPickedImage) return
 
         let imageBlock = {
             name: pickedImage.filename,
-            type: pickedImage.mime,
+            type: 'multipart/form-data',
+            mime: pickedImage.mime,
             uri: pickedImage.path
         }
+        console.log("image", imageBlock)
         uploadScannedData({
             name,
             lat: 12,

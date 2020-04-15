@@ -101,11 +101,10 @@ export const useUploadScanData = () => {
             }
 
         }).then(res => {
-            // console.log("response", res)
             setData(res.data)
             setApiState({ loading: false, fetched: true, error: {} })
         }).catch(err => {
-            // console.log("error", err)
+            console.log("error", err)
             setApiState({ loading: false, fetched: true, error: {} })
         })
 
