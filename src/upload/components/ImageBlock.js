@@ -19,8 +19,6 @@ export default ({ loading, data, removeImage, changeImage }) => {
         return null
     }
 
-    console.log(data)
-
     return (
         <View style={styles.block}>
             <View style={listStyles.block}>
@@ -31,7 +29,9 @@ export default ({ loading, data, removeImage, changeImage }) => {
                         containerStyle={listStyles.cancelBtn}
                         size={28}
                         color={colors.error}
-                        onPress={() => removeImage()} />
+                        onPress={() => {
+                            if (!loading) removeImage()
+                        }} />
                 </View>
                 <View style={listStyles.imgWrapper}>
                     <Image
@@ -45,6 +45,7 @@ export default ({ loading, data, removeImage, changeImage }) => {
                 buttonStyle={[listStyles.btn, listStyles.outlined]}
                 titleStyle={listStyles.outlinedText}
                 titleProps={{ maxFontSizeMultiplier: 1 }}
+                disabled={loading}
                 onPress={changeImage} />
         </View>
     )

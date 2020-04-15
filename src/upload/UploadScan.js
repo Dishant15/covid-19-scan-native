@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 
 import { View, Text, ScrollView } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
@@ -9,6 +9,7 @@ import ImageBlock from './components/ImageBlock'
 import useGallaryPicker from './useGallaryPicker'
 
 import styles, { listStyles, formStyles } from './styles'
+import { useUploadScanData } from '../utils/data'
 
 
 
@@ -17,12 +18,32 @@ export default () => {
     const nameRef = useRef(null)
     const ageRef = useRef(null)
     const { top } = useSafeArea()
+    const [api_state, data, uploadScannedData] = useUploadScanData()
+
+    const [name, setName] = useState('')
+    const [age, setAge] = useState('')
 
     const { hasPickedImage, pickImageFromGallary, pickedImage, removeImage } = useGallaryPicker()
 
-    const uploadImage = () => {
+    console.log(data, pickedImage)
 
+    const uploadImage = () => {
+        if (!hasPickedImage) return
+
+        let imageBlock = {
+            name: pickedImage.filename,
+            type: pickedImage.mime,
+            uri: pickedImage.path
+        }
+        uploadScannedData({
+            name,
+            lat: 12,
+            long: 12,
+            age,
+            image: imageBlock
+        })
     }
+
 
     if (!hasPickedImage) {
         return (
@@ -46,6 +67,7 @@ export default () => {
         )
     }
 
+
     return (
         <View style={{ paddingTop: top, flex: 1 }}>
             <ScrollView
@@ -59,6 +81,8 @@ export default () => {
                         blurOnSubmit={false}
                         underlineColorAndroid='transparent'
                         label="Name"
+                        value={name}
+                        onChangeText={(value) => setName(value)}
                         labelProps={{
                             maxFontSizeMultiplier: 1
                         }}
@@ -94,6 +118,8 @@ export default () => {
                         }}
                         placeholder="eg. 22"
                         returnKeyType="done"
+                        value={age}
+                        onChangeText={(value) => setAge(value)}
                         containerStyle={styles.containerStyle}
                         inputContainerStyle={{
                             borderBottomWidth: 0
@@ -101,6 +127,7 @@ export default () => {
                 </View>
 
                 <ImageBlock
+                    loading={api_state.loading}
                     data={pickedImage}
                     changeImage={pickImageFromGallary}
                     removeImage={removeImage} />
@@ -110,6 +137,8 @@ export default () => {
                 title="Upload"
                 buttonStyle={[listStyles.btn, listStyles.primary]}
                 titleStyle={listStyles.primaryText}
+                disabled={api_state.loading}
+                loading={api_state.loading}
                 onPress={uploadImage} />
         </View>
     )
