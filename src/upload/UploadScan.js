@@ -28,12 +28,20 @@ export default () => {
 
     const { hasPickedImage, pickImageFromGallary, pickedImage, removeImage, cropImage } = useGallaryPicker()
 
+    const resetFields = () => {
+        setAge('')
+        setName('')
+        removeImage()
+    }
 
     const toggleResult = (isPositive = null) => {
         if (isPositive == null) {
-            setResult({
-                show: false,
-                isPositive: result.isPositive
+            resetFields()
+            InteractionManager.runAfterInteractions(() => {
+                setResult({
+                    show: false,
+                    isPositive: result.isPositive
+                })
             })
             return
         }
