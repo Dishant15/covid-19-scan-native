@@ -25,19 +25,28 @@ export default () => {
         setPickedImage({})
     }
 
-    const pickImageFromGallary = () => {
-        ImagePicker.openPicker({
-            width: 2160,
-            height: 2160,
-            mediaType: 'photo',
+    const cropImage = () => {
+        ImagePicker.openCropper({
             cropping: true,
             freeStyleCropEnabled: true,
-            avoidEmptySpaceAroundImage: true
+            avoidEmptySpaceAroundImage: true,
+            path: pickedImage.path,
+            width: pickedImage.width,
+            height: pickedImage.width,
+            ...pickedImage
+        }).then((image) => {
+            setPickedImage({ ...image, filename: pickedImage.filename })
+        }).catch(_ => { })
+    }
+
+    const pickImageFromGallary = () => {
+        ImagePicker.openPicker({
+            mediaType: 'photo'
         }).then((image) => {
             setPickedImage(image)
         }).catch(_ => { })
     }
 
 
-    return { hasPickedImage, pickedImage, pickImageFromGallary, removeImage, cleanTempImage }
+    return { hasPickedImage, pickedImage, pickImageFromGallary, removeImage, cleanTempImage, cropImage }
 }

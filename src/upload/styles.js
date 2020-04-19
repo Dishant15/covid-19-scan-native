@@ -1,6 +1,8 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native'
 import { colors } from '../utils/constants'
 
+const { width, height } = Dimensions.get('window')
+
 
 export const listStyles = StyleSheet.create({
     block: {
@@ -130,5 +132,43 @@ export default StyleSheet.create({
         height: 2,
         backgroundColor: '#bdbdbd',
         opacity: 0.5
+    },
+    secondaryBtnWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+
+
+    //==================================================================
+    // FORM BLOCK
+    //==================================================================
+
+    modal: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    alertModal: {
+        width: width * 0.7,
+        height: width * 0.8,
+        borderRadius: 10
+    },
+    centerInParent: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    success: {
+        backgroundColor: colors.success
+    },
+    fail: {
+        backgroundColor: colors.fail
+    },
+    text: {
+        padding: 16,
+        fontSize: 18,
+        color: 'white'
+    },
+    large: {
+        fontSize: 34,
+        fontWeight: 'bold'
     }
 })

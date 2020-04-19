@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 
-import { View, Text, ScrollView, Platform } from 'react-native'
+import { View, Text, ScrollView, Platform, InteractionManager } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
 import { Icon, Button, Input } from 'react-native-elements'
 
@@ -10,6 +10,8 @@ import useGallaryPicker from './useGallaryPicker'
 
 import styles, { listStyles, formStyles } from './styles'
 import { useUploadScanData } from '../utils/data'
+import { size, get, toLower, trim } from 'lodash'
+import ResultModal from './components/ResultModal'
 
 
 
@@ -22,31 +24,53 @@ export default () => {
 
     const [name, setName] = useState('')
     const [age, setAge] = useState('')
+    const [result, setResult] = useState({ show: false, isPositive: false })
 
-    const { hasPickedImage, pickImageFromGallary, pickedImage, removeImage } = useGallaryPicker()
+    const { hasPickedImage, pickImageFromGallary, pickedImage, removeImage, cropImage } = useGallaryPicker()
 
-    console.log("response", data)
 
+    const toggleResult = (isPositive = null) => {
+        if (isPositive == null) {
+            setResult({
+                show: false,
+                isPositive: result.isPositive
+            })
+            return
+        }
+        setResult({
+            show: !result.show,
+            isPositive
+        })
+    }
+
+
+    /**
+     * functiona to upload image through API
+     */
     const uploadImage = () => {
         if (!hasPickedImage) return
 
         let imageBlock = {
             name: pickedImage.filename,
-            type: 'multipart/form-data',
-            mime: pickedImage.mime,
-            uri: pickedImage.path
+            type: pickedImage.mime,
+            uri: Platform.OS === 'android' ? pickedImage.path : pickedImage.path.replace("file://", ""),
         }
-        console.log("image", imageBlock)
         uploadScannedData({
             name,
-            lat: 12,
-            long: 12,
+            lat: 22.2587,
+            long: 71.192,
             age,
             image: imageBlock
-        })
+        }).then((res) => {
+            let result = get(res, "result", '')
+            toggleResult(toLower(trim(result)) === 'covid')
+        }).catch(_ => { })
     }
 
 
+    /**
+     * render Empty View
+     */
     if (!hasPickedImage) {
         return (
             <View style={{ paddingTop: top, flex: 1 }}>
@@ -71,77 +95,88 @@ export default () => {
 
 
     return (
-        <View style={{ paddingTop: top, flex: 1 }}>
-            <ScrollView
-                style={styles.block}>
-                <Text style={styles.heading}>Upload</Text>
-                <View style={styles.inputBlock}>
-                    <Input
-                        ref={nameRef}
-                        placeholder="eg. John Smith"
-                        returnKeyType='next'
-                        blurOnSubmit={false}
-                        underlineColorAndroid='transparent'
-                        label="Name"
-                        value={name}
-                        onChangeText={(value) => setName(value)}
-                        labelProps={{
-                            maxFontSizeMultiplier: 1
-                        }}
-                        labelStyle={{
-                            fontSize: 12,
-                            fontWeight: "bold"
-                        }}
-                        inputStyle={{
-                            fontSize: 14
-                        }}
-                        containerStyle={styles.containerStyle}
-                        inputContainerStyle={{
-                            borderBottomWidth: 0
-                        }}
-                        onSubmitEditing={() => {
-                            ageRef.current.focus()
-                        }} />
+        <React.Fragment>
+            <View style={{ paddingTop: top, flex: 1 }}>
+                <ScrollView
+                    style={styles.block}>
+                    <Text style={styles.heading}>Upload</Text>
+                    <View style={styles.inputBlock}>
+                        <Input
+                            ref={nameRef}
+                            placeholder="eg. John Smith"
+                            returnKeyType='next'
+                            blurOnSubmit={false}
+                            underlineColorAndroid='transparent'
+                            label="Name"
+                            value={name}
+                            onChangeText={(value) => setName(value)}
+                            labelProps={{
+                                maxFontSizeMultiplier: 1
+                            }}
+                            labelStyle={{
+                                fontSize: 12,
+                                fontWeight: "bold"
+                            }}
+                            inputStyle={{
+                                fontSize: 14
+                            }}
+                            containerStyle={styles.containerStyle}
+                            inputContainerStyle={{
+                                borderBottomWidth: 0
+                            }}
+                            onSubmitEditing={() => {
+                                ageRef.current.focus()
+                            }} />
 
-                    <View style={styles.smallSeperator} />
+                        <View style={styles.smallSeperator} />
 
-                    <Input
-                        ref={ageRef}
-                        label="Age"
-                        labelProps={{
-                            maxFontSizeMultiplier: 1
-                        }}
-                        labelStyle={{
-                            fontSize: 12,
-                            fontWeight: "bold"
-                        }}
-                        inputStyle={{
-                            fontSize: 14
-                        }}
-                        placeholder="eg. 22"
-                        returnKeyType="done"
-                        value={age}
-                        onChangeText={(value) => setAge(value)}
-                        containerStyle={styles.containerStyle}
-                        inputContainerStyle={{
-                            borderBottomWidth: 0
-                        }} />
-                </View>
+                        <Input
+                            ref={ageRef}
+                            label="Age"
+                            labelProps={{
+                                maxFontSizeMultiplier: 1
+                            }}
+                            labelStyle={{
+                                fontSize: 12,
+                                fontWeight: "bold"
+                            }}
+                            inputStyle={{
+                                fontSize: 14
+                            }}
+                            placeholder="eg. 22"
+                            returnKeyType="done"
+                            value={age}
+                            onChangeText={(value) => setAge(value)}
+                            containerStyle={styles.containerStyle}
+                            inputContainerStyle={{
+                                borderBottomWidth: 0
+                            }} />
+                    </View>
 
-                <ImageBlock
+                    <ImageBlock
+                        loading={api_state.loading}
+                        data={pickedImage}
+                        changeImage={pickImageFromGallary}
+                        removeImage={removeImage}
+                        cropImage={cropImage} />
+
+                </ScrollView>
+                <Button
+                    title="Upload"
+                    buttonStyle={[listStyles.btn, listStyles.primary]}
+                    titleStyle={listStyles.primaryText}
+                    disabled={api_state.loading}
                     loading={api_state.loading}
-                    data={pickedImage}
-                    changeImage={pickImageFromGallary}
-                    removeImage={removeImage} />
-
-            </ScrollView>
-            <Button
-                title="Upload"
-                buttonStyle={[listStyles.btn, listStyles.primary]}
-                titleStyle={listStyles.primaryText}
-                disabled={api_state.loading}
-                loading={api_state.loading}
-                onPress={uploadImage} />
-        </View>
+                    onPress={uploadImage} />
+            </View>
+            <ResultModal
+                show={result.show}
+                toggleModal={() => {
+                    InteractionManager.runAfterInteractions(() => {
+                        toggleResult()
+                    })
+                }}
+                isPositive={result.isPositive} />
+        </React.Fragment>
     )
 }

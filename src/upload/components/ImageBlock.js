@@ -13,7 +13,7 @@ import styles, { listStyles } from '../styles'
  * Parent
  *      UploadScan
  */
-export default ({ loading, data, removeImage, changeImage }) => {
+export default ({ loading, data, removeImage, changeImage, cropImage }) => {
 
     if (size(data) === 0) {
         return null
@@ -39,14 +39,28 @@ export default ({ loading, data, removeImage, changeImage }) => {
                         style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }} />
                 </View>
             </View>
-            <Button
-                type='outline'
-                title='Change Image'
-                buttonStyle={[listStyles.btn, listStyles.outlined]}
-                titleStyle={listStyles.outlinedText}
-                titleProps={{ maxFontSizeMultiplier: 1 }}
-                disabled={loading}
-                onPress={changeImage} />
+            <View style={styles.secondaryBtnWrapper}>
+                <View style={styles.block}>
+                    <Button
+                        type='outline'
+                        title='Crop Image'
+                        buttonStyle={[listStyles.btn, listStyles.outlined]}
+                        titleStyle={listStyles.outlinedText}
+                        titleProps={{ maxFontSizeMultiplier: 1 }}
+                        disabled={loading}
+                        onPress={cropImage} />
+                </View>
+                <View style={styles.block}>
+                    <Button
+                        type='outline'
+                        title='Change Image'
+                        buttonStyle={[listStyles.btn, listStyles.outlined]}
+                        titleStyle={listStyles.outlinedText}
+                        titleProps={{ maxFontSizeMultiplier: 1 }}
+                        disabled={loading}
+                        onPress={changeImage} />
+                </View>
+            </View>
         </View>
     )
 }

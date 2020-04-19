@@ -68,47 +68,41 @@ export const useUploadScanData = () => {
     const [api_state, setApiState] = useState({ loading: false, fetched: false, error: {} })
     const [data, setData] = useState({})
 
+
     const uploadScannedData = ({ name, lat, long, age, image }) => {
-        if (api_state.loading) return;
+        if (api_state.loading) {
+            return
+        };
 
         let formData = new FormData()
 
         formData.append("name", name)
         formData.append("lat", lat)
         formData.append("long", long)
+        formData.append("age", age)
         formData.append("image", image)
 
         const url = 'http://3.7.38.181/v1/api/uploaddata/'
 
-        // fetch(url, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'multipart/form-data',
-        //     },
-        //     body: formData
-        // }).then(res => {
-        //     console.log(res)
-        //     setData(res.data)
-        //     setApiState({ loading: false, fetched: true, error: {} })
-        // }).catch(err => {
-        //     console.log(err)
-        //     setApiState({ loading: false, fetched: true, error: {} })
-        // })
+        setApiState({ ...api_state, loading: true, fetched: false, error: {} })
+        setData({})
 
-        Axios.post(url, formData, {
+        return Axios.post(url, formData, {
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'multipart/form-data',
             }
 
         }).then(res => {
+            // console.log("res => data", res.data)
             setData(res.data)
             setApiState({ loading: false, fetched: true, error: {} })
+            return Promise.resolve(res.data)
         }).catch(err => {
-            console.log("error", err)
-            setApiState({ loading: false, fetched: true, error: {} })
+            // console.log("res => err", err)
+            setApiState({ loading: false, fetched: false, error: {} })
+            return Promise.reject(err)
         })
-
-        setApiState({ ...api_state, loading: true, error: {} })
     }
 
     return [api_state, data, uploadScannedData]
