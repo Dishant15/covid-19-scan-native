@@ -71,11 +71,15 @@ export default StyleSheet.create({
         fontSize: 14,
         fontWeight: 'bold',
         padding: 8,
-        borderRightWidth: 1,
-        borderColor: colors.grey2,
-        color: colors.grey2
+        color: colors.grey2,
     },
     dropdownValue: {
         fontSize: 14
+    },
+    verticalSeperator: {
+        width: 2,
+        backgroundColor: "#e8e8e8",
+        alignSelf: 'stretch',
+        marginVertical: 8
     }
 })

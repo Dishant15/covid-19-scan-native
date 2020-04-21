@@ -10,6 +10,7 @@ import styles from './styles'
 import { size, get } from 'lodash'
 import { colors } from 'react-native-elements'
 import AnalyticsBlock from './components/AnalyticsBlock'
+import CustomPicker from './components/CustomPicker'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 
 
@@ -18,7 +19,7 @@ export default () => {
 
     const { top } = useSafeArea()
     const { api_state, summary, regionalList, getRegionDetails, getApiData } = useAnalyticsInfo()
-    const [selecteRegion, setSelectedRegion] = useState({ label: 'Gujarat', value: 'Gujarat' })
+    const [selectedRegion, setSelectedRegion] = useState({ label: 'Gujarat', value: 'Gujarat' })
 
 
     if (api_state.loading && size(summary) === 0) {
@@ -31,6 +32,8 @@ export default () => {
             </View>
         )
     }
+
+    console.log(regionalList)
 
     return (
         <View style={{ paddingTop: top, flex: 1 }}>
@@ -46,20 +49,30 @@ export default () => {
                 <View style={{ flex: 1 }}>
                     <View style={styles.dropdownWrapper}>
                         <Text style={styles.dropdownLabel}>Select State</Text>
+                        <View style={styles.verticalSeperator} />
                         <View style={styles.block}>
-                            <TouchableOpacity onPress={() => { }}>
+                            <CustomPicker
+                                initialValues={selectedRegion}
+                                options={regionalList}
+                                mapLabel={(region) => region.label}
+                                mapValue={(region) => region.value}
+                                keyExtractor={(region) => region.value}
+                                onPickerValueChange={(newRegion) => {
+                                    console.log("newRegion", newRegion)
+                                    setSelectedRegion(newRegion)
+                                }}>
                                 <View style={styles.row}>
                                     <View style={styles.block}>
-                                        <Text style={styles.dropdownValue}>{selecteRegion.label}</Text>
+                                        <Text style={styles.dropdownValue}>{selectedRegion.label}</Text>
                                     </View>
                                     <Icon
                                         name="md-arrow-dropdown"
                                         type="ionicon" />
                                 </View>
-                            </TouchableOpacity>
+                            </CustomPicker>
                         </View>
                     </View>
-                    <AnalyticsBlock cardTitle={selecteRegion.label} data={getRegionDetails(selecteRegion.value)} />
+                    <AnalyticsBlock cardTitle={selectedRegion.label} data={getRegionDetails(selectedRegion.value)} />
                     <AnalyticsBlock cardTitle="India" data={summary} />
                 </View>
             </ScrollView>

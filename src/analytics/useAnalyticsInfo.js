@@ -32,7 +32,7 @@ export default () => {
                     value: location
                 })
             });
-            setRegionalList(regions)
+            setRegionalList(dropdownData)
         }
     }, [regions])
 
