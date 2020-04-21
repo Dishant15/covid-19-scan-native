@@ -12,6 +12,8 @@ export const useGetQuestionsData = () => {
 
     const [api_state, setApiState] = useState({ loading: false, fetched: false, error: {} })
     const [data, setData] = useState({})
+    const [results, setResults] = useState({})
+
 
     // "english","hindi","bangla","telugu","tamil"
     const getApiData = (language = 'english') => {
@@ -48,6 +50,7 @@ export const useGetQuestionsData = () => {
                     que_list.push(current_que)
                 }
                 setData(que_list)
+                setResults(res.data.risk)
                 setApiState({ loading: false, fetched: true, error: {} })
             })
             .catch(err => {
@@ -58,7 +61,7 @@ export const useGetQuestionsData = () => {
         setApiState({ ...api_state, loading: true, error: {} })
     }
 
-    return [api_state, data, getApiData]
+    return [api_state, data, getApiData, results]
 }
 
 
@@ -106,4 +109,29 @@ export const useUploadScanData = () => {
     }
 
     return [api_state, data, uploadScannedData]
+}
+
+
+export const useStateApiData = () => {
+    const [api_state, setApiState] = useState({ loading: false, fetched: false, error: {} })
+    const [data, setData] = useState({})
+
+    const getApiData = () => {
+        if (api_state.loading) return;
+
+        const url = 'https://api.rootnet.in/covid19-in/stats/latest'
+
+        Axios.get(url).then(res => {
+            // console.log("res => data", res.data)
+            setData(res.data)
+            setApiState({ loading: false, fetched: true, error: {} })
+        }).catch(err => {
+            // console.log("res => err", err)
+            setApiState({ loading: false, fetched: false, error: {} })
+        })
+
+        setApiState({ ...api_state, loading: true, error: {} })
+    }
+
+    return [api_state, data, getApiData]
 }
