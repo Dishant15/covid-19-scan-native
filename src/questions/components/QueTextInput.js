@@ -7,6 +7,7 @@ import FastImage from 'react-native-fast-image'
 import styles from '../styles'
 import DOC_ICON from '../../assets/doc.png'
 import MALE_ICON from '../../assets/male.png'
+import { size } from 'lodash'
 
 
 /**
@@ -70,7 +71,13 @@ export default ({ index, question, ans, ans_selected, placeholder, buttonText, i
                     <Button
                         title={buttonText}
                         buttonStyle={[styles.queOption, styles.selected]}
-                        onPress={() => setAns(index, text)}
+                        onPress={() => {
+                            if (size(text) > 0) {
+                                setAns(index, text)
+                            } else {
+                                alert("Please enter valid age")
+                            }
+                        }}
                         titleStyle={{ fontSize: 14 }} />
                 </View>
             }

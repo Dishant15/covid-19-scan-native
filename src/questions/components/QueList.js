@@ -5,6 +5,7 @@ import { View } from 'react-native'
 import QueTextInput from "./QueTextInput"
 import QueSingleSelect from "./QueSingleSelect"
 import QueMultiSelect from "./QueMultiSelect"
+import QueUploadScan from "./QueUploadScan"
 
 export default class QueList extends React.Component {
 
@@ -28,6 +29,15 @@ export default class QueList extends React.Component {
         }
 
         this.setState({ question_list: new_list, current_ind: current_ind + 1 })
+    }
+
+    // called by UploadScanQue, set Scan result
+    onComplete = (scan_result) => {
+        // scan_result : 0 | 1 | 2
+        const { onComplete } = this.props
+        const { question_list } = this.state
+        // pass question_list to parent
+        onComplete(question_list, scan_result)
     }
 
     render = () => {
@@ -61,6 +71,9 @@ export default class QueList extends React.Component {
                         />
                     }
                 })}
+                {current_ind >= question_list.length &&
+                    <QueUploadScan onComplete={this.onComplete} />
+                }
             </View>
         )
     }

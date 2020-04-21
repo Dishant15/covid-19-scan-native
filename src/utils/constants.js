@@ -7,5 +7,6 @@ export const colors = {
     accentDark: '#0D73E6',      // dark blue
 
     success: '#43A047', // green 600
+    orange: '#ef6c00', // orange 800
     fail: '#E53935' // red 600
 }
