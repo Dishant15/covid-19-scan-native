@@ -61,7 +61,13 @@ export const useGetQuestionsData = () => {
         setApiState({ ...api_state, loading: true, error: {} })
     }
 
-    return [api_state, data, getApiData, results]
+    const resetApi = () => {
+        setApiState({ loading: false, fetched: false, error: {} })
+        setData({})
+        setResults({})
+    }
+
+    return [api_state, data, getApiData, results, resetApi]
 }
 
 

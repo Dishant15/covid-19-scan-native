@@ -39,7 +39,7 @@ export default ({ navigation }) => {
 
     const scrollViewRef = useRef(null)
     const safeArea = useSafeArea()
-    const [api_state, data, getApiData, results] = useGetQuestionsData()
+    const [api_state, data, getApiData, results, resetApi] = useGetQuestionsData()
 
     const [language, setLanguage] = useState('engish')
     const [ans_selected, setAnsSelected] = useState(false)
@@ -49,7 +49,11 @@ export default ({ navigation }) => {
 
     useFocusEffect(useCallback(() => {
         return () => {
+            // reset all data on tab change
             setShowResults(false)
+            setRisk('')
+            setAnsSelected(false)
+            resetApi()
         }
     }, []))
 
