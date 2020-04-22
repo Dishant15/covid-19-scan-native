@@ -33,7 +33,7 @@ export default () => {
         )
     }
 
-    console.log(regionalList)
+    // console.log(regionalList)
 
     return (
         <View style={{ paddingTop: top, flex: 1 }}>

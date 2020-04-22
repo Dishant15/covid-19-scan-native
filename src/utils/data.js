@@ -54,7 +54,7 @@ export const useGetQuestionsData = () => {
                 setApiState({ loading: false, fetched: true, error: {} })
             })
             .catch(err => {
-                console.log(err)
+                // console.log(err)
                 setApiState({ loading: false, fetched: false, error: {} })
             })
 
