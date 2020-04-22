@@ -53,7 +53,7 @@ const CustomPicker = props => {
                         setSelectedValue(itemValue)
                     }}
                     selectedValue={selectedValue}
-                    itemStyle={{ fontSize: 16, ...fonts.regular }}>
+                    itemStyle={{ fontSize: 16 }}>
                     {options.map((item, index) => {
                         let label = mapLabel(item)
                         let value = mapValue(item)
@@ -157,12 +157,11 @@ const styles = StyleSheet.create({
         padding: 16
     },
     optText: {
-        fontSize: 14,
-        ...fonts.regular
+        fontSize: 14
     },
     cancelIcon: {
         alignSelf: 'flex-end',
-        padding: 16,
+        padding: 16
     }
 })
 
