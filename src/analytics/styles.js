@@ -30,6 +30,7 @@ export default StyleSheet.create({
         opacity: 0.8,
         color: '#bdbdbd',
         padding: 8,
+        textAlign: 'center',
         alignSelf: 'center'
     },
     row: {

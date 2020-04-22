@@ -58,7 +58,6 @@ export default () => {
                                 mapValue={(region) => region.value}
                                 keyExtractor={(region) => region.value}
                                 onPickerValueChange={(newRegion) => {
-                                    console.log("newRegion", newRegion)
                                     setSelectedRegion(newRegion)
                                 }}>
                                 <View style={styles.row}>
