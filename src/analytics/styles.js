@@ -60,22 +60,33 @@ export default StyleSheet.create({
         textAlign: 'center'
     },
     dropdownWrapper: {
-        margin: 16,
-        padding: 8,
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderRadius: 10,
-        overflow: 'hidden',
-        backgroundColor: 'white'
+        margin: 12
     },
     dropdownLabel: {
+        marginHorizontal: 4,
         fontSize: 14,
-        fontWeight: 'bold',
-        padding: 8,
-        color: colors.grey2,
+        fontWeight: 'bold'
+    },
+    dropdownValueWrapper: {
+        padding: 16,
+        marginVertical: 16,
+        marginHorizontal: 4,
+        minWidth: 56,
+        backgroundColor: 'white',
+        borderRadius: 10,
+        overflow: "hidden"
     },
     dropdownValue: {
         fontSize: 14
+    },
+    activeValue: {
+        backgroundColor: colors.success,
+    },
+    activeHeaderValue: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        marginHorizontal: 8,
+        color: '#0D73E6'
     },
     verticalSeperator: {
         width: 2,

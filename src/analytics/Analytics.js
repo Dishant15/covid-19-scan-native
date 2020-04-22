@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react'
 
-import { View, Text, ActivityIndicator, RefreshControl } from 'react-native'
+import { View, Text, ActivityIndicator, RefreshControl, ScrollView, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { useSafeArea } from 'react-native-safe-area-context'
 import useAnalyticsInfo from './useAnalyticsInfo'
@@ -11,7 +11,6 @@ import { size, get } from 'lodash'
 import { colors } from 'react-native-elements'
 import AnalyticsBlock from './components/AnalyticsBlock'
 import CustomPicker from './components/CustomPicker'
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 
 
 
@@ -48,33 +47,32 @@ export default () => {
                 <Text style={styles.heading}>Analytics</Text>
                 <View style={{ flex: 1 }}>
                     <View style={styles.dropdownWrapper}>
-                        <Text style={styles.dropdownLabel}>Select State</Text>
-                        <View style={styles.verticalSeperator} />
-                        <View style={styles.block}>
-                            <CustomPicker
-                                initialValues={selectedRegion}
-                                options={regionalList}
-                                mapLabel={(region) => region.label}
-                                mapValue={(region) => region.value}
-                                keyExtractor={(region) => region.value}
-                                onPickerValueChange={(newRegion) => {
-                                    setSelectedRegion(newRegion)
-                                }}>
-                                <View style={styles.row}>
-                                    <View style={styles.block}>
-                                        <Text style={styles.dropdownValue}>{selectedRegion.label}</Text>
-                                    </View>
-                                    <Icon
-                                        name="md-arrow-dropdown"
-                                        type="ionicon" />
-                                </View>
-                            </CustomPicker>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={styles.dropdownLabel}>Select State</Text>
+                            <Text style={[styles.dropdownValue, styles.activeHeaderValue]}>{selectedRegion.label}</Text>
                         </View>
+                        <ScrollView
+                            showsHorizontalScrollIndicator={false}
+                            horizontal>
+                            {regionalList.map((item, index) => {
+                                return (
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            setSelectedRegion(item)
+                                        }}
+                                        key={item.value}>
+                                        <View style={[styles.dropdownValueWrapper, selectedRegion.value === item.value && styles.activeValue]}>
+                                            <Text style={selectedRegion.value === item.value && { color: 'white', fontWeight: 'bold' }}>{item.label}</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                )
+                            })}
+                        </ScrollView>
                     </View>
                     <AnalyticsBlock cardTitle={selectedRegion.label} data={getRegionDetails(selectedRegion.value)} />
                     <AnalyticsBlock cardTitle="India" data={summary} />
                 </View>
             </ScrollView>
-        </View>
+        </View >
     )
 }
