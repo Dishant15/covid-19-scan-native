@@ -84,7 +84,7 @@ export default ({ index, question, options, confirm_text, ans, ans_selected, set
                         const is_selected = selAns.indexOf(option.value) !== -1
                         return (
                             <TouchableOpacity style={[styles.queOption, is_selected && styles.active]} key={i} onPress={() => handleSelectedAns(option.value)}>
-                                <Text maxFontSizeMultiplier={1}>
+                                <Text maxFontSizeMultiplier={1} style={styles.selectedText}>
                                     {option.text}
                                 </Text>
                             </TouchableOpacity>
