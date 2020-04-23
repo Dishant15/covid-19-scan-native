@@ -165,10 +165,16 @@ export default StyleSheet.create({
     text: {
         padding: 16,
         fontSize: 18,
-        color: 'white'
+        color: 'white',
+    },
+    medium: {
+        fontSize: 14,
+        color: 'white',
+        textAlign: 'center'
     },
     large: {
-        fontSize: 34,
-        fontWeight: 'bold'
+        fontSize: 24,
+        fontWeight: 'bold',
+        textAlign: 'center'
     }
 })

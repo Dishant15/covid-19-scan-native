@@ -144,7 +144,8 @@ const UploadScanBlock = ({ onCompleteUpload }) => {
                         onSubmitEditing={() => {
                             ageRef.current.focus()
                         }}
-                        errorMessage={get(errors, "name", "")} />
+                        errorMessage={get(errors, "name", "")}
+                        errorStyle={{ marginHorizontal: 0 }} />
 
                     <View style={styles.smallSeperator} />
 
