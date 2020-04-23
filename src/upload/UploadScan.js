@@ -37,7 +37,8 @@ export default () => {
             <View style={{ paddingTop: top, flex: 1 }}>
                 <Text style={styles.heading}>AiVed Result</Text>
                 <UploadScanBlock
-                    onCompleteUpload={(isPositive) => {
+                    onCompleteUpload={(isPositive, resetFiels = false) => {
+                        if (resetFiels) resetFiels()
                         toggleResult(isPositive)
                     }} />
             </View>

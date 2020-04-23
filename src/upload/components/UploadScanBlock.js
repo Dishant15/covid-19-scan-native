@@ -7,7 +7,7 @@ import ImageBlock from './ImageBlock'
 import useGallaryPicker from '../useGallaryPicker'
 import { useUploadScanData } from '../../utils/data'
 import styles, { listStyles } from '../styles'
-import { size, get, toLower, trim } from 'lodash'
+import { size, get, toLower, trim, isNaN } from 'lodash'
 
 
 
@@ -18,6 +18,7 @@ const UploadScanBlock = ({ onCompleteUpload }) => {
 
     const [name, setName] = useState('')
     const [age, setAge] = useState('')
+    const [errors, setErrors] = useState({})
     const { hasPickedImage, pickImageFromGallary, pickedImage, removeImage, cropImage } = useGallaryPicker()
 
     let isMounted = false
@@ -35,10 +36,40 @@ const UploadScanBlock = ({ onCompleteUpload }) => {
     }
 
     /**
+     * check empty field and valid age
+     */
+    const validData = () => {
+        if (!hasPickedImage) {
+            alert("Please select image")
+            return false
+        }
+
+        let errors = {}
+        if (size(name) === 0) {
+            errors = { name: "Please enter your name" }
+        }
+        if (size(age) === 0) {
+            errors = { ...errors, age: "Please Enter Age" }
+        } else if (isNaN(Number(age))) {
+            errors = { ...errors, age: "Please Enter Valid Age" }
+        }
+
+        if (size(errors) > 0) {
+            setErrors(errors)
+            return false
+        }
+        setErrors({})
+        return true
+    }
+
+    /**
      * functiona to upload image through API
      */
     const uploadImage = () => {
-        if (!hasPickedImage) return
+
+        if (!validData()) {
+            return
+        }
 
         let imageBlock = {
             name: pickedImage.filename,
@@ -53,10 +84,7 @@ const UploadScanBlock = ({ onCompleteUpload }) => {
             image: imageBlock
         }).then((res) => {
             let result = get(res, "result", '')
-            onCompleteUpload(toLower(trim(result)) === 'covid')
-            if (isMounted) {
-                resetFields()
-            }
+            onCompleteUpload(toLower(trim(result)) === 'covid', resetFields)
         }).catch(_ => {
             onCompleteUpload(null)
         })
@@ -115,7 +143,8 @@ const UploadScanBlock = ({ onCompleteUpload }) => {
                         }}
                         onSubmitEditing={() => {
                             ageRef.current.focus()
-                        }} />
+                        }}
+                        errorMessage={get(errors, "name", "")} />
 
                     <View style={styles.smallSeperator} />
 
@@ -139,7 +168,9 @@ const UploadScanBlock = ({ onCompleteUpload }) => {
                         containerStyle={styles.containerStyle}
                         inputContainerStyle={{
                             borderBottomWidth: 0
-                        }} />
+                        }}
+                        errorMessage={get(errors, "age", "")}
+                        errorStyle={{ marginHorizontal: 0 }} />
                 </View>
 
                 <ImageBlock
