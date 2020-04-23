@@ -25,11 +25,12 @@ export default StyleSheet.create({
         elevation: 5,
     },
     sectionTitle: {
-        fontSize: 32,
+        fontSize: 26,
         fontWeight: 'bold',
         opacity: 0.8,
         color: '#bdbdbd',
         padding: 8,
+        paddingHorizontal: 16,
         textAlign: 'center',
         alignSelf: 'center'
     },

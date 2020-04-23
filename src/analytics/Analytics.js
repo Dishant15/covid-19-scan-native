@@ -48,7 +48,7 @@ export default () => {
                 <View style={{ flex: 1 }}>
                     <View style={styles.dropdownWrapper}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={styles.dropdownLabel}>Select State</Text>
+                            <Text style={styles.dropdownLabel}>Selected State</Text>
                             <Text style={[styles.dropdownValue, styles.activeHeaderValue]}>{selectedRegion.label}</Text>
                         </View>
                         <ScrollView
