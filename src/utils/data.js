@@ -91,7 +91,8 @@ export const useUploadScanData = () => {
         formData.append("age", age)
         formData.append("image", image)
 
-        const url = 'http://3.7.38.181/v1/api/uploaddata/'
+        // const url = 'http://3.7.38.181/v1/api/uploaddata/'
+        const url = 'http://aived.in/v1/api/uploaddata/'
 
         setApiState({ ...api_state, loading: true, fetched: false, error: {} })
         setData({})
