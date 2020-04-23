@@ -18,7 +18,7 @@ export default () => {
     return (
         <Tab.Navigator>
             <Tab.Screen
-                name="Q & A"
+                name="Assessment"
                 component={Questions}
                 options={{
                     tabBarIcon: ({ color, size }) => (
@@ -30,7 +30,7 @@ export default () => {
                     )
                 }} />
             <Tab.Screen
-                name="Upload"
+                name="Result"
                 component={UploadScan}
                 options={{
                     tabBarIcon: ({ color, size }) => (
@@ -42,7 +42,7 @@ export default () => {
                     )
                 }} />
             <Tab.Screen
-                name="Analytics"
+                name="Updates"
                 component={Analytics}
                 options={{
                     tabBarIcon: ({ color, size }) => (

@@ -63,7 +63,7 @@ export default StyleSheet.create({
         flex: 1
     },
     heading: {
-        fontSize: 38,
+        fontSize: 32,
         fontWeight: 'bold',
         margin: 16
     },

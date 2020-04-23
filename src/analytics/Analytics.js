@@ -24,7 +24,7 @@ export default () => {
     if (api_state.loading && size(summary) === 0) {
         return (
             <View style={{ paddingTop: top, flex: 1 }}>
-                <Text style={styles.heading}>Analytics</Text>
+                <Text style={styles.heading}>Covid-19 Update</Text>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <ActivityIndicator size="large" color={colors.grey4} />
                 </View>
@@ -44,7 +44,7 @@ export default () => {
                             getApiData()
                         }} />
                 }>
-                <Text style={styles.heading}>Analytics</Text>
+                <Text style={styles.heading}>Covid-19 Update</Text>
                 <View style={{ flex: 1 }}>
                     <View style={styles.dropdownWrapper}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>

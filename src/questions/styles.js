@@ -70,7 +70,7 @@ export default StyleSheet.create({
     //=====================================================
     //=====================================================
     heading: {
-        fontSize: 38,
+        fontSize: 32,
         fontWeight: 'bold',
         margin: 16
     },

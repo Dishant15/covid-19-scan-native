@@ -35,7 +35,7 @@ export default () => {
     return (
         <React.Fragment>
             <View style={{ paddingTop: top, flex: 1 }}>
-                <Text style={styles.heading}>Upload</Text>
+                <Text style={styles.heading}>AiVed Result</Text>
                 <UploadScanBlock
                     onCompleteUpload={(isPositive) => {
                         toggleResult(isPositive)

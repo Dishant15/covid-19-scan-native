@@ -112,7 +112,7 @@ export default ({ navigation }) => {
                 ref={scrollViewRef}
                 onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: false })}
                 contentContainerStyle={{ paddingBottom: 100 }}>
-                <Text style={styles.heading}>Q & A</Text>
+                <Text style={styles.heading}>AiVed Assessment</Text>
                 <QueSingleSelect
                     question={FIRST_QUE.question} options={FIRST_QUE.options}
                     ans={language} ans_selected={ans_selected}
