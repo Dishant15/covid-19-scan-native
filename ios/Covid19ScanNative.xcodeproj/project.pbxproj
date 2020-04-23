@@ -45,7 +45,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* Covid19ScanNativeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Covid19ScanNativeTests.m; sourceTree = "<group>"; };
 		11931C6B1DD2231979415FAF /* Pods-Covid19ScanNative-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Covid19ScanNative-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Covid19ScanNative-tvOS/Pods-Covid19ScanNative-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Covid19ScanNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Covid19ScanNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* AiVed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AiVed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Covid19ScanNative/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Covid19ScanNative/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -189,7 +189,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Covid19ScanNative.app */,
+				13B07F961A680F5B00A75B9A /* AiVed.app */,
 				00E356EE1AD99517003FC87E /* Covid19ScanNativeTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* Covid19ScanNative-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* Covid19ScanNative-tvOSTests.xctest */,
@@ -238,7 +238,7 @@
 			);
 			name = Covid19ScanNative;
 			productName = Covid19ScanNative;
-			productReference = 13B07F961A680F5B00A75B9A /* Covid19ScanNative.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* AiVed.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* Covid19ScanNative-tvOS */ = {
@@ -750,7 +750,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Covid19ScanNative;
-				PRODUCT_NAME = Covid19ScanNative;
+				PRODUCT_NAME = AiVed;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -773,7 +773,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Covid19ScanNative;
-				PRODUCT_NAME = Covid19ScanNative;
+				PRODUCT_NAME = AiVed;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
