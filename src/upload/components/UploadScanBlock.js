@@ -71,8 +71,9 @@ const UploadScanBlock = ({ onCompleteUpload }) => {
             return
         }
 
+        let typeArr = pickedImage.mime.split("/")
         let imageBlock = {
-            name: pickedImage.filename,
+            name: get(pickedImage, "filename", `${name}-${age}-${get(pickedImage, "modificationDate", "img")}.${typeArr[1]}`),
             type: pickedImage.mime,
             uri: Platform.OS === 'android' ? pickedImage.path : pickedImage.path.replace("file://", ""),
         }

@@ -88,9 +88,10 @@ export const useUploadScanData = () => {
         formData.append("name", name)
         formData.append("lat", lat)
         formData.append("long", long)
-        formData.append("age", age)
+        formData.append("age", Number(age))
         formData.append("image", image)
 
+        // console.log("formdata", formData)
         // const url = 'http://3.7.38.181/v1/api/uploaddata/'
         const url = 'http://aived.in/v1/api/uploaddata/'
 
@@ -100,7 +101,7 @@ export const useUploadScanData = () => {
         return Axios.post(url, formData, {
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'multipart/form-data',
+                'Content-Type': 'multipart/form-data;charset=utf-8;',
             }
 
         }).then(res => {

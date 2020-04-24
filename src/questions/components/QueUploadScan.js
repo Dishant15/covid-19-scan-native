@@ -18,8 +18,8 @@ const UPLOAD_RESULT_QUE = {
     question: "Chest X-ray AI result :",
     options: [
         { text: "Not Uploaded", value: 0 },
-        { text: "Normal", value: 1 },
-        { text: "Covid", value: 2 },
+        { text: "You may be Covid-19 Negative", value: 1 },
+        { text: "You may be Covid-19 Positive", value: 2 },
     ]
 }
 
