@@ -35,3 +35,12 @@ debugImplementation 'com.facebook.soloader:soloader:0.9.0'
 ```
 ./gradlew clean
 ```
+
+
+**File upload not working in 0.62**
+
+this issue is due to Flipper network
+
+- comment all flipper code from build.gridle
+- comment whole ReactNativeFlipper File
+- comment initializeFlipper code from MainApplication.js
