@@ -2,16 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:gravity="center"
+    android:background="#1f2243">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center|center_horizontal"
-        android:text="Covid19 Scan"
-        android:textColor="@android:color/black"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+    <ImageView
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        android:src="@drawable/splash_icon"/>
 </LinearLayout>
