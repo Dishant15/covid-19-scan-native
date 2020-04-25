@@ -744,6 +744,7 @@
 				);
 				INFOPLIST_FILE = Covid19ScanNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -767,6 +768,7 @@
 				DEVELOPMENT_TEAM = 66H8FB8J9R;
 				INFOPLIST_FILE = Covid19ScanNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
