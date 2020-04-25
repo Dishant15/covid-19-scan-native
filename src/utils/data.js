@@ -19,7 +19,7 @@ export const useGetQuestionsData = () => {
     const getApiData = (language = 'english') => {
         if (api_state.loading) return;
 
-        const url = 'http://ec2-3-7-38-181.ap-south-1.compute.amazonaws.com/v1/api/bot/'
+        const url = 'http://aived.in/v1/api/bot/'
         Axios.post(url, { language })
             .then(res => {
                 // console.log(res)
@@ -91,8 +91,6 @@ export const useUploadScanData = () => {
         formData.append("age", Number(age))
         formData.append("image", image)
 
-        // console.log("formdata", formData)
-        // const url = 'http://3.7.38.181/v1/api/uploaddata/'
         const url = 'http://aived.in/v1/api/uploaddata/'
 
         setApiState({ ...api_state, loading: true, fetched: false, error: {} })
